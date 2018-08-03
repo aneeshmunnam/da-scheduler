@@ -1,7 +1,9 @@
 package com.dascheduler.scheduler;
 
+import com.dascheduler.model.User;
 import com.dascheduler.service.SchedulerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailException;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -15,9 +17,15 @@ public class DaScheduler {
     @Autowired
     private SchedulerService schedulerService;
 
+    User user = new User("aneesh", "munnam", "xxxxxxxxxxxxxx@gmail.com");
+
     @Scheduled(cron = "0 * * * * ?")
     public void run(){
-        int email = schedulerService.schedulerEmail();
-        logger.info("Email sent to "+email);
+        try {
+            schedulerService.schedulerEmail(user);
+            logger.info("Email sent from " + user.getEmailAddress());
+        }catch (MailException e){
+            logger.info("Error sending message"+e);
+        }
     }
 }

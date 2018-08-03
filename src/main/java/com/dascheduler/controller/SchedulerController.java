@@ -13,8 +13,8 @@ public class SchedulerController {
     @Autowired
     private SchedulerService schedulerService;
 
-    @GetMapping
-    public int schedulerTest(){
-        return schedulerService.schedulerEmail();
-    }
+//    @GetMapping
+//    public int schedulerTest(){
+//        return schedulerService.schedulerEmail();
+//    }
 }
