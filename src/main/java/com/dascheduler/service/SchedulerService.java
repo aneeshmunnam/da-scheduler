@@ -1,6 +1,6 @@
 package com.dascheduler.service;
 
-import com.dascheduler.model.User;
+import com.dascheduler.model.SenderDetails;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
@@ -19,7 +19,7 @@ public class SchedulerService {
         this.javaMailSender = javaMailSender;
     }
 
-    public void schedulerEmail(User user) throws MailException{
+    public void schedulerEmail(SenderDetails user) throws MailException{
 
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(mailAddress);
