@@ -1,4 +1,4 @@
-package com.dascheduler.service;
+package com.dascheduler.emailservice;
 
 import com.dascheduler.model.SenderDetails;
 import org.springframework.beans.factory.annotation.Value;

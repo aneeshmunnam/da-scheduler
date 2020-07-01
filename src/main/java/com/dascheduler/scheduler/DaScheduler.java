@@ -1,7 +1,7 @@
 package com.dascheduler.scheduler;
 
 import com.dascheduler.model.SenderDetails;
-import com.dascheduler.service.SchedulerService;
+import com.dascheduler.emailservice.SchedulerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.scheduling.annotation.Scheduled;
