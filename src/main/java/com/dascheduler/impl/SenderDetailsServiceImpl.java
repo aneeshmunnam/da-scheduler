@@ -23,7 +23,7 @@ public class SenderDetailsServiceImpl implements SenderDetailsService {
 
     @Override
     public SenderDetails getSenderDetailsById(UUID senderDetailsId) {
-        return senderDetailsRepository.findOne(senderDetailsId);
+        return senderDetailsRepository.getOne(senderDetailsId);
     }
 
     @Override
@@ -38,6 +38,7 @@ public class SenderDetailsServiceImpl implements SenderDetailsService {
 
     @Override
     public void deleteSenderDetail(UUID senderDetailId) {
-        senderDetailsRepository.delete(senderDetailId);
+        SenderDetails deleteSenderDEtails = senderDetailsRepository.getOne(senderDetailId);
+        senderDetailsRepository.delete(deleteSenderDEtails);
     }
 }
