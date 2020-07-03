@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -22,8 +23,8 @@ public class SenderDetailsServiceImpl implements SenderDetailsService {
     }
 
     @Override
-    public SenderDetails getSenderDetailsById(UUID senderDetailsId) {
-        return senderDetailsRepository.getOne(senderDetailsId);
+    public Optional<SenderDetails> getSenderDetailsById(UUID senderDetailsId) {
+        return senderDetailsRepository.findById(senderDetailsId);
     }
 
     @Override
@@ -40,5 +41,10 @@ public class SenderDetailsServiceImpl implements SenderDetailsService {
     public void deleteSenderDetail(UUID senderDetailId) {
         SenderDetails deleteSenderDEtails = senderDetailsRepository.getOne(senderDetailId);
         senderDetailsRepository.delete(deleteSenderDEtails);
+    }
+
+    @Override
+    public List<SenderDetails> getSenderDetailsByEmailAddress(String emailAddress) {
+        return senderDetailsRepository.getSenderDetailsByEmailAddress(emailAddress);
     }
 }

@@ -20,13 +20,13 @@ public class DaScheduler {
 //    SenderDetails user = new SenderDetails("aneesh", "munnam", "xxxxxxxxxxxxxx@gmail.com");
     SenderDetails user = null;
 
-    @Scheduled(cron = "0 * * * * ?")
-    public void run(){
-        try {
-            schedulerService.schedulerEmail(user);
-            logger.info("Email sent from " + user.getEmailAddress());
-        }catch (MailException e){
-            logger.info("Error sending message"+e);
-        }
-    }
+//    @Scheduled(cron = "0 * * * * ?")
+//    public void run(){
+//        try {
+//            schedulerService.schedulerEmail(user);
+//            logger.info("Email sent from " + user.getEmailAddress());
+//        }catch (MailException e){
+//            logger.info("Error sending message"+e);
+//        }
+//    }
 }

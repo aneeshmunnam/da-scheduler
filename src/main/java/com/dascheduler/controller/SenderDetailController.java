@@ -1,6 +1,5 @@
 package com.dascheduler.controller;
 
-import com.dascheduler.emailservice.SchedulerService;
 import com.dascheduler.model.SenderDetails;
 import com.dascheduler.service.SenderDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,10 +35,14 @@ public class SenderDetailController {
         senderDetailsService.deleteSenderDetail(senderId);
     }
 
-    @GetMapping("/{senderId}")
-    public Object getSenderDEtailsById(@PathVariable("senderId") UUID sender){
-        return senderDetailsService.getSenderDetailsById(sender);
+    @GetMapping("/{id}")
+    private Object getSenderDetailsById(@PathVariable("id") UUID id){
+        return senderDetailsService.getSenderDetailsById(id);
     }
 
+    @GetMapping("email/{emailAddress}")
+    private Object getSenderDetailsByEmailAddress(@PathVariable("emailAddress") String emailAddress) {
+        return senderDetailsService.getSenderDetailsByEmailAddress(emailAddress);
+    }
 
 }
