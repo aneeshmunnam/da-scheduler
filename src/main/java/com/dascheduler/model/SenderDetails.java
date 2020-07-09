@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.UUID;
 
 @Entity
@@ -35,6 +36,6 @@ public class SenderDetails {
     @Column(length = 4096)
     private String message;
     @Column
-    private Calendar time;
+    private Date time;
 
 }

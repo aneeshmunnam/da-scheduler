@@ -39,6 +39,7 @@ public class SenderDetailController {
         if (bindingResult.hasErrors()) {
             return "addSender";
         }
+        System.out.println(senderDetails.getTime());
         senderDetailsService.createSenderDetail(senderDetails);
         return "index";
     }
