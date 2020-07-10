@@ -1,5 +1,6 @@
 package com.dascheduler.controller;
 
+import com.dascheduler.emailservice.SchedulerService;
 import com.dascheduler.model.SenderDetails;
 import com.dascheduler.service.SenderDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,9 @@ public class SenderDetailController {
 
     @Autowired
     private SenderDetailsService senderDetailsService;
+
+    @Autowired
+    private SchedulerService schedulerService;
 
     @RequestMapping(method = RequestMethod.GET)
     public String add(Model model) {
@@ -41,6 +45,7 @@ public class SenderDetailController {
         }
         System.out.println(senderDetails.getTime());
         senderDetailsService.createSenderDetail(senderDetails);
+        schedulerService.schedulerEmail(senderDetails);
         return "index";
     }
 

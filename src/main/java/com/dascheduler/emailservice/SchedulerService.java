@@ -1,11 +1,14 @@
 package com.dascheduler.emailservice;
 
 import com.dascheduler.model.SenderDetails;
+import com.dascheduler.scheduler.DaScheduler;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+
+import java.util.logging.Logger;
 
 @Service
 public class SchedulerService {
@@ -20,11 +23,13 @@ public class SchedulerService {
     }
 
     public void schedulerEmail(SenderDetails user) throws MailException{
-
+        Logger logger = Logger.getLogger(SchedulerService.class.getName());
+        logger.info("Sending email to "+user.getEmailAddress());
         SimpleMailMessage mailMessage = new SimpleMailMessage();
-        mailMessage.setTo(mailAddress);
-        mailMessage.setSubject("Message");
-        mailMessage.setText("Hello! hi");
+        mailMessage.setTo(user.getEmailAddress());
+        mailMessage.setFrom(mailAddress);
+        mailMessage.setSubject("Test Message");
+        mailMessage.setText(user.getMessage());
 
         javaMailSender.send(mailMessage);
     }

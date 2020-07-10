@@ -17,8 +17,6 @@ public class DaScheduler {
     @Autowired
     private SchedulerService schedulerService;
 
-//    SenderDetails user = new SenderDetails("aneesh", "munnam", "xxxxxxxxxxxxxx@gmail.com");
-    SenderDetails user = null;
 
 //    @Scheduled(cron = "0 * * * * ?")
 //    public void run(){

@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.Type;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -36,6 +37,7 @@ public class SenderDetails {
     @Column(length = 4096)
     private String message;
     @Column
+    @DateTimeFormat(pattern = "dd/MM/yyyy h:mm a")
     private Date time;
 
 }
