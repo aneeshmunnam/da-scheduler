@@ -28,15 +28,15 @@ public class SenderDetails {
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @Type(type="uuid-char")
     private UUID id;
-    @Column
+    @Column(name = "firstName")
     private String firstName;
-    @Column
+    @Column(name = "lastName")
     private String lastName;
-    @Column
+    @Column(name = "emailAddress")
     private String emailAddress;
-    @Column(length = 4096)
+    @Column(name = "message", length = 4096)
     private String message;
-    @Column
+    @Column(name = "time")
     @DateTimeFormat(pattern = "dd/MM/yyyy h:mm a")
     private Date time;
 

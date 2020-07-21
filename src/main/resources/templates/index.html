@@ -12,8 +12,32 @@
     <title>Sender</title>
 </head>
 <body>
-    <div class="container my-5">
-        <a href="/senderDetails">Add Sender</a>
+    <div th:switch="${senderDetails}">
+        <h2 th:case="null">No Sender Details yet</h2>
+        <div th:case="*">
+            <h2 style="text-align: center">Email Sender</h2>
+            <table class="table table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Email Address</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="senderDetail: ${senderDetails}">
+                        <td th:text="${senderDetail.emailAddress}"></td>
+                        <td th:text="${senderDetail.firstName}"></td>
+                        <td th:text="${senderDetail.time}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div>
+        <button type="button" class="btn btn-primary">
+            <a href="/senderDetails" style="color: white;">Add Sender</a>
+        </button>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"

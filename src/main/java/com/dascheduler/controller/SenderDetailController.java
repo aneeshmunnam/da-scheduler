@@ -24,6 +24,7 @@ public class SenderDetailController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String add(Model model) {
+        model.addAttribute("senderDetails", senderDetailsService.getSenderDetails());
         return "index";
     }
 
@@ -46,6 +47,7 @@ public class SenderDetailController {
         System.out.println(senderDetails.getTime());
         senderDetailsService.createSenderDetail(senderDetails);
         schedulerService.schedulerEmail(senderDetails);
+        model.addAttribute("senderDetails", senderDetailsService.getSenderDetails());
         return "index";
     }
 
