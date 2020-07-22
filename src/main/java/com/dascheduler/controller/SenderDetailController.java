@@ -2,6 +2,7 @@ package com.dascheduler.controller;
 
 import com.dascheduler.emailservice.SchedulerService;
 import com.dascheduler.model.SenderDetails;
+import com.dascheduler.scheduler.DaScheduler;
 import com.dascheduler.service.SenderDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,9 +23,14 @@ public class SenderDetailController {
     @Autowired
     private SchedulerService schedulerService;
 
+    @Autowired
+    private DaScheduler daScheduler;
+
     @RequestMapping(method = RequestMethod.GET)
     public String add(Model model) {
         model.addAttribute("senderDetails", senderDetailsService.getSenderDetails());
+        //test for Simple Quartz Scheduler
+        daScheduler.quartzSchedulerBasicTest();
         return "index";
     }
 
