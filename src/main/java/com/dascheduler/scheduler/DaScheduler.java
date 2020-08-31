@@ -1,10 +1,11 @@
 package com.dascheduler.scheduler;
 
-import org.quartz.Scheduler;
-import org.quartz.SchedulerException;
+import com.dascheduler.model.SenderDetails;
+import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
 import java.util.logging.Logger;
 
 @Component
@@ -12,12 +13,22 @@ public class DaScheduler {
 
     Logger logger = Logger.getLogger(DaScheduler.class.getName());
 
-    public void quartzSchedulerBasicTest() {
+    public void quartzSchedulerBasicTest(SenderDetails senderDetails) {
         try {
-            Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
-            scheduler.start();
-            logger.info("Spring Quartz Scheduler start/shutdown");
-            scheduler.shutdown();
+            SchedulerFactory stf = new StdSchedulerFactory();
+            Scheduler scheduler = stf.getScheduler();
+            JobDetail jobDetail = JobBuilder
+                                .newJob()
+                                .withIdentity("senderDeatils_"+senderDetails.getId()).build();
+            jobDetail.getJobDataMap().put("senderDetailsId", senderDetails.getId());
+            //this would run at 8 every day
+            Trigger trigger = TriggerBuilder.newTrigger()
+                                .forJob("senderDeatils_"+senderDetails.getId())
+                                .withIdentity("senderDeatils_"+senderDetails.getId())
+                                .withSchedule(CronScheduleBuilder.cronSchedule("0 8 * * * ?"))
+                                .build();
+            Date ft = scheduler.scheduleJob(jobDetail, trigger);
+            logger.info("Email service is scheduled at "+ft);
         } catch (SchedulerException se) {
             se.printStackTrace();
         }

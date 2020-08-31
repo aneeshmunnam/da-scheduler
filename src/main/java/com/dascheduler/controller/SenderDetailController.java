@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.xml.ws.Response;
 import java.util.UUID;
 
 @Controller
@@ -29,8 +30,6 @@ public class SenderDetailController {
     @RequestMapping(method = RequestMethod.GET)
     public String add(Model model) {
         model.addAttribute("senderDetails", senderDetailsService.getSenderDetails());
-        //test for Simple Quartz Scheduler
-        daScheduler.quartzSchedulerBasicTest();
         return "index";
     }
 
@@ -51,8 +50,11 @@ public class SenderDetailController {
             return "addSender";
         }
         System.out.println(senderDetails.getTime());
-        senderDetailsService.createSenderDetail(senderDetails);
-        schedulerService.schedulerEmail(senderDetails);
+        SenderDetails savedDetails = senderDetailsService.createSenderDetail(senderDetails);
+        if (savedDetails == null)
+            return null;
+        //test for Simple Quartz Scheduler
+        daScheduler.quartzSchedulerBasicTest(savedDetails);
         model.addAttribute("senderDetails", senderDetailsService.getSenderDetails());
         return "index";
     }
