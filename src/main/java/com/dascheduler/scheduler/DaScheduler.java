@@ -18,13 +18,13 @@ public class DaScheduler {
             SchedulerFactory stf = new StdSchedulerFactory();
             Scheduler scheduler = stf.getScheduler();
             JobDetail jobDetail = JobBuilder
-                                .newJob()
-                                .withIdentity("senderDeatils_"+senderDetails.getId()).build();
+                                .newJob(SchedulerEmailJob.class)
+                                .withIdentity("SenderDetails", "senderDetails_"+senderDetails.getId()).build();
             jobDetail.getJobDataMap().put("senderDetailsId", senderDetails.getId());
             //this would run at 8 every day
             Trigger trigger = TriggerBuilder.newTrigger()
-                                .forJob("senderDeatils_"+senderDetails.getId())
-                                .withIdentity("senderDeatils_"+senderDetails.getId())
+                                .forJob("SenderDetails","senderDetails_"+senderDetails.getId())
+                                .withIdentity("SenderDetails","senderDetails_"+senderDetails.getId())
                                 .withSchedule(CronScheduleBuilder.cronSchedule("0 8 * * * ?"))
                                 .build();
             Date ft = scheduler.scheduleJob(jobDetail, trigger);
