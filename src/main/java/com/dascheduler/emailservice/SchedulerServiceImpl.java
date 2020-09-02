@@ -2,6 +2,7 @@ package com.dascheduler.emailservice;
 
 import com.dascheduler.model.SenderDetails;
 import com.dascheduler.scheduler.DaScheduler;
+import com.dascheduler.service.SchedulerService;
 import com.dascheduler.service.SenderDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,7 +16,7 @@ import java.util.UUID;
 import java.util.logging.Logger;
 
 @Service
-public class SchedulerService {
+public class SchedulerServiceImpl implements SchedulerService {
 
     @Autowired
     private SenderDetailsService senderDetailsService;
@@ -25,13 +26,14 @@ public class SchedulerService {
 
     private JavaMailSender javaMailSender;
 
-    public SchedulerService(JavaMailSender javaMailSender) {
+    public SchedulerServiceImpl(JavaMailSender javaMailSender) {
         this.javaMailSender = javaMailSender;
     }
 
+    @Override
     public void schedulerEmail(UUID id) throws MailException{
         Optional<SenderDetails> user = senderDetailsService.getSenderDetailsById(id);
-        Logger logger = Logger.getLogger(SchedulerService.class.getName());
+        Logger logger = Logger.getLogger(SchedulerServiceImpl.class.getName());
         if (user.isPresent()) {
             logger.info("Sending email to " + user.get().getEmailAddress());
             SimpleMailMessage mailMessage = new SimpleMailMessage();

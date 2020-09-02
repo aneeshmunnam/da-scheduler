@@ -1,6 +1,5 @@
 package com.dascheduler.controller;
 
-import com.dascheduler.emailservice.SchedulerService;
 import com.dascheduler.model.SenderDetails;
 import com.dascheduler.scheduler.DaScheduler;
 import com.dascheduler.service.SenderDetailsService;
@@ -11,7 +10,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.xml.ws.Response;
 import java.util.UUID;
 
 @Controller
@@ -20,9 +18,6 @@ public class SenderDetailController {
 
     @Autowired
     private SenderDetailsService senderDetailsService;
-
-    @Autowired
-    private SchedulerService schedulerService;
 
     @Autowired
     private DaScheduler daScheduler;
