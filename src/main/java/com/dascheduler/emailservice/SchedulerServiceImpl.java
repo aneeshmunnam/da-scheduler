@@ -1,7 +1,6 @@
 package com.dascheduler.emailservice;
 
 import com.dascheduler.model.SenderDetails;
-import com.dascheduler.scheduler.DaScheduler;
 import com.dascheduler.service.SchedulerService;
 import com.dascheduler.service.SenderDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;

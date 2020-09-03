@@ -1,12 +1,15 @@
 package com.dascheduler.scheduler;
 
 import com.dascheduler.service.SchedulerService;
+import com.dascheduler.service.SenderDetailsService;
 import org.quartz.Job;
 import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.quartz.QuartzJobBean;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import java.util.UUID;
 import java.util.logging.Logger;

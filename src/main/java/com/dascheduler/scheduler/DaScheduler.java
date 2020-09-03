@@ -3,29 +3,34 @@ package com.dascheduler.scheduler;
 import com.dascheduler.model.SenderDetails;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Logger;
 
-@Component
 public class DaScheduler {
 
+    private Class<? extends Job> jobClass;
+
+    @Autowired
+    private Scheduler scheduler;
+
     Logger logger = Logger.getLogger(DaScheduler.class.getName());
+
+    public DaScheduler(Class<? extends Job> jobClass) {
+        this.jobClass = jobClass;
+    }
 
     /**
      *
      * @param senderDetails
      */
-    @SuppressWarnings("unchecked")
-    public void quartzSchedulerBasicTest(SenderDetails senderDetails) {
+    public void addSchedulerJob(SenderDetails senderDetails) {
         try {
-            SchedulerFactory stf = new StdSchedulerFactory();
-            Scheduler scheduler = stf.getScheduler();
             scheduler.start();
             JobDetail jobDetail = JobBuilder
-                                .newJob(SchedulerEmailJob.class)
+                                .newJob(jobClass)
                                 .withIdentity("SenderDetails", "senderDetails_"+senderDetails.getId())
                                 .build();
             jobDetail.getJobDataMap().put("senderDetailsId", senderDetails.getId().toString());
@@ -35,8 +40,8 @@ public class DaScheduler {
                                 .withIdentity("SenderDetailsTrigger","senderDetails_"+senderDetails.getId())
                                 .withSchedule(CronScheduleBuilder.cronSchedule(convertDateToCron(senderDetails.getTime())))
                                 .build();
-            Date ft = scheduler.scheduleJob(jobDetail, trigger);
-            logger.info("Email service is scheduled at "+ft);
+            scheduler.scheduleJob(jobDetail, trigger);
+            logger.info("Email service is scheduled");
         } catch (SchedulerException se) {
             se.printStackTrace();
         }
