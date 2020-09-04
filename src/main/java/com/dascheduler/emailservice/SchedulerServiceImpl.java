@@ -44,7 +44,7 @@ public class SchedulerServiceImpl implements SchedulerService {
             javaMailSender.send(mailMessage);
         }
         else {
-            logger.info("The user with id:" +id+" is not present");
+            logger.info("The user with id:" +id+" is no longer available");
         }
     }
 }

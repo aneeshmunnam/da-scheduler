@@ -41,7 +41,7 @@ public class DaScheduler {
                                 .withSchedule(CronScheduleBuilder.cronSchedule(convertDateToCron(senderDetails.getTime())))
                                 .build();
             scheduler.scheduleJob(jobDetail, trigger);
-            logger.info("Email service is scheduled");
+            logger.info("Email service is scheduled at "+senderDetails.getTime());
         } catch (SchedulerException se) {
             se.printStackTrace();
         }

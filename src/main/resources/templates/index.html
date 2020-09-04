@@ -22,6 +22,7 @@
                         <th scope="col">Email Address</th>
                         <th scope="col">First Name</th>
                         <th scope="col">time</th>
+                        <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -29,6 +30,9 @@
                         <td th:text="${senderDetail.emailAddress}"></td>
                         <td th:text="${senderDetail.firstName}"></td>
                         <td th:text="${senderDetail.time}"></td>
+                        <td>
+                            <a th:href="|@{/delete_senderDetails/{id}(id=${senderDetail.id})}|" class="btn btn-danger">Delete</a>
+                        </td>
                     </tr>
                 </tbody>
             </table>

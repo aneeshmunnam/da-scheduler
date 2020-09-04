@@ -59,9 +59,13 @@ public class SenderDetailController {
         return senderDetailsService.updateSenderDetail(updateDetails);
     }
 
-    @DeleteMapping("senderDetails/{senderId}")
-    private void deleteSenderDetails(@PathVariable("senderId")UUID senderId) {
-        senderDetailsService.deleteSenderDetail(senderId);
+    @RequestMapping(value = "delete_senderDetails/{id}", method = RequestMethod.GET)
+    private Object deleteSenderDetails(@PathVariable("id")String senderId) {
+        if (senderId != null) {
+            UUID senderUUID = UUID.fromString(senderId);
+            senderDetailsService.deleteSenderDetail(senderUUID);
+        }
+        return "index";
     }
 
     @GetMapping("senderDetails/{id}")
